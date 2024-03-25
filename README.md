@@ -1,17 +1,18 @@
-# transport-mpc
+# Transport MPC Package
 Predictive controller for load transportation in microgravity environment. We present centralized and decentralized MPC controllers based on the work of **Collaborative Load Transportation in Microgravity Environments: Centralized and Decentralized Predictive Controllers**.
 
 <p align="center">
   <img src="https://github.com/pSujet/transport-mpc/blob/main/media/tethered.png" width="500"/>
 </p>
 
-## Required Installation
+## Requirements
+This package was tested on a Ubuntu 22.04 LTS with the following packages:
 - Python 3.10
 - CasADi 3.6.5
 - matplotlib 3.5.1
 ```
-pip install casadi
-python -m pip install -U matplotlib
+pip install casadi==3.6.5
+pip install -U matplotlib==3.5.1
 ```
 ## Running Simulation in Python
 1. Clone the repository:
@@ -52,11 +53,4 @@ python start_controller.py
 To run a decentralized controller
 ```
 ros2 launch transport-mpc start_controller_decen.launch.py
-```
-
-
-## Citing this work
-To cite this work, please use the following BibTeX entry:
-```
-@inproceedings{}
 ```
