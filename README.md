@@ -14,10 +14,13 @@ This package was tested on a Ubuntu 22.04 LTS with the following packages:
 pip install casadi==3.6.5
 pip install -U matplotlib==3.5.1
 ```
+
+**NOTE**: Please ensure that your system can run the proposed controllers in real-time. If the sampling frequency of 0.1s is not achievable, the controller performance will degrade. 
+
 ## Running Simulation in Python
 1. Clone the repository:
 ```
-git clone git@github.com:pSujet/transport-mpc.git
+git clone git@github.com:pSujet/transport_mpc.git
 ```
 2. Run the demo of three agents with a centralized MPC controller:
 ```
