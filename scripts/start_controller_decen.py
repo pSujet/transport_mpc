@@ -14,6 +14,7 @@ from transporter.controllers.nonlinear_mpc_2D_decen import NonlinearMPC2DDec
 from transporter.utils.plotter import Plotter
 from transporter.utils.path_generator import PathGenerator
 import argparse
+import matplotlib.pyplot as plt
 import pickle
 from datetime import datetime
 
@@ -167,10 +168,17 @@ if __name__ == '__main__':
         # file_path_gazebo_decen = ''
         # with open(file_path_gazebo_decen, 'wb') as file:
         #     pickle.dump(data, file)
-        plotter.plot_all()
+        plotter.plot_cost()    
+        plotter.plot_states_track('load')    
+        plotter.plot_states_track('transporter1') 
+        plotter.plot_states_track('transporter2')
+        plotter.plot_traj()
+        plotter.plot_input('transporter1')  
+        plt.show()
     elif agent == 2:        
         # file_path_gazebo_decen = ''
         # with open(file_path_gazebo_decen, 'wb') as file:
         #     pickle.dump(data, file)
-        # plotter.plot_input('transporter2')
+        plotter.plot_input('transporter2')
+        plt.show()
         pass
