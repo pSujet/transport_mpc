@@ -49,13 +49,4 @@ Press 'P' to pause the simulation and 'R' to resume.
 
 
 ## Running Simulation in Gazebo (2D)
-To run the simulation in Gazebo, you need to also install the simulation package: [discower_transportation](https://github.com/DISCOWER/discower_transportation).
-
-To run a centralized controller
-```
-python start_controller.py 
-```
-To run a decentralized controller
-```
-ros2 launch transport-mpc start_controller_decen.launch.py
-```
+To run the simulation in Gazebo, please refer to the instructions in the Gazebo simulation package [discower_transportation](https://github.com/DISCOWER/discower_transportation).
