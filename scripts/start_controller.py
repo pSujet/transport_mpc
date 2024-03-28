@@ -37,12 +37,13 @@ if __name__ == '__main__':
     transporter = CentralizedModel2D()
     dt = 0.1                                              # controller dt
     N = 15*dt                                             # prediction horizon [s]
-    Q = ca.diag([100,100,75,75,30,30,
-             100,100,75,75,30,30,
-             1000,1000,750,750,700,500])*5
+    Q = ca.diag([100,100,75,75,10,15,
+            100,100,75,75,10,15,
+            1000,1000,750,750,1000,100])*5
     R = ca.diag([1,1,1,1,
                 1,1,1,1])*10
     P = Q*10
+
 
     ulim = 1.4
     
@@ -71,41 +72,6 @@ if __name__ == '__main__':
     x_warm = ca.repmat(x0,1,controller.Nt+1)
     u_warm = np.zeros([transporter.m,controller.Nt])
 
-    ####################################################################################
-    ####                            POINT TRACKING                                  #### 
-    ####################################################################################
-    
-    # -- Task 1: Translation in x-direction
-    pL_ref = ca.DM([[0.2],[0.0]])
-    theL_ref = ca.DM([0])
-    p1_ref,p2_ref,the1_ref,the2_ref = transporter.get_equi_pos_2D(pL_ref,theL_ref)
-    xref1 = ca.vertcat(p1_ref,0,0,the1_ref,0,p2_ref,0,0,the2_ref,0,pL_ref,0,0,theL_ref,0)
-
-    # -- Task 2: Translation in y-direction
-    pL_ref = ca.DM([[0.0],[0.2]])
-    theL_ref = ca.DM([0])
-    p1_ref,p2_ref,the1_ref,the2_ref = transporter.get_equi_pos_2D(pL_ref,theL_ref)
-    xref2 = ca.vertcat(p1_ref,0,0,the1_ref,0,p2_ref,0,0,the2_ref,0,pL_ref,0,0,theL_ref,0)
-
-    # -- Task 3: Rotation in z-direction
-    pL_ref = ca.DM([[0.0],[0.0]])
-    theL_ref = ca.DM([np.pi/2])
-    p1_ref,p2_ref,the1_ref,the2_ref = transporter.get_equi_pos_2D(pL_ref,theL_ref)
-    xref3 = ca.vertcat(p1_ref,0,0,the1_ref,0,p2_ref,0,0,the2_ref,0,pL_ref,0,0,theL_ref,0)
-
-    # -- Task 4: Combined task
-    pL_ref = ca.DM([[0.2],[0.2]])
-    theL_ref = ca.DM([np.pi/12])
-    p1_ref,p2_ref,the1_ref,the2_ref = transporter.get_equi_pos_2D(pL_ref,theL_ref)
-    xref4 = ca.vertcat(p1_ref,0,0,the1_ref,0,p2_ref,0,0,the2_ref,0,pL_ref,0,0,theL_ref,0)
-
-    # -- Task 5: Test
-    pL_ref = ca.DM([[0.2],[0.2]])
-    theL_ref = ca.DM([0])
-    p1_ref,p2_ref,the1_ref,the2_ref = transporter.get_equi_pos_2D(pL_ref,theL_ref)
-    xref5 = ca.vertcat(p1_ref,0,0,the1_ref,0,p2_ref,0,0,the2_ref,0,pL_ref,0,0,theL_ref,0)
-
-    xref_array = xref4
 
     ####################################################################################
     ####                           Sequence of POINT TRACKING                       #### 
@@ -138,16 +104,6 @@ if __name__ == '__main__':
     xref_array = np.hstack((xref1,xref2,xref3,xref4))
 
     ####################################################################################
-    ####                            TRAJECTORY TRACKING                             #### 
-    ####################################################################################
-    path = PathGenerator(transporter)
-    # -- circle
-    # xref_array = path.generate_circle([-0.5,0],0.5,40,loop_time=100)
-    # # -- eight figure
-    xref_array = path.generate_eight_figure(1,90,loop_time=100)
-
-
-    ####################################################################################
     ####                            START CONTROLLER                                #### 
     ####################################################################################
     init = {'x0':x0,'x_warm':x_warm,'u_warm':u_warm,'xref':xref_array}  
@@ -155,11 +111,11 @@ if __name__ == '__main__':
 
     data = run(transporter,controller,init,simulation_time)
     plotter = Plotter(data,transporter)
-    now = str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
+    # now = str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
 
-    file_path_gazebo_cen = ''
-    with open(file_path_gazebo_cen, 'wb') as file:
-        pickle.dump(data, file)
+    # file_path_gazebo_cen = ''
+    # with open(file_path_gazebo_cen, 'wb') as file:
+    #     pickle.dump(data, file)
 
     plotter.plot_all()
 

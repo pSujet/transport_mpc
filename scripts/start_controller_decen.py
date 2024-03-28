@@ -164,13 +164,13 @@ if __name__ == '__main__':
 
     now = str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
     if agent == 1: 
-        file_path_gazebo_decen = ''
-        with open(file_path_gazebo_decen, 'wb') as file:
-            pickle.dump(data, file)
+        # file_path_gazebo_decen = ''
+        # with open(file_path_gazebo_decen, 'wb') as file:
+        #     pickle.dump(data, file)
         plotter.plot_all()
     elif agent == 2:        
-        file_path_gazebo_decen = ''
-        with open(file_path_gazebo_decen, 'wb') as file:
-            pickle.dump(data, file)
+        # file_path_gazebo_decen = ''
+        # with open(file_path_gazebo_decen, 'wb') as file:
+        #     pickle.dump(data, file)
         # plotter.plot_input('transporter2')
         pass
