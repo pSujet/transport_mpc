@@ -6,11 +6,13 @@ Predictive controller for load transportation in microgravity environment. We pr
 </p>
 
 ## Requirements
-This package was tested on a Ubuntu 22.04 LTS with the following packages:
+This package was tested on a Ubuntu 20.04 LTS and Ubuntu 22.04 LTS with the following packages:
 - Python 3.10
 - CasADi 3.6.5
 - matplotlib 3.5.1
-```
+
+To install the required python dependencies system-wide, please run:
+```bash
 pip install casadi==3.6.5
 pip install -U matplotlib==3.5.1
 ```
@@ -19,19 +21,19 @@ pip install -U matplotlib==3.5.1
 
 ## Running Simulation in Python
 1. Clone the repository:
-```
+```bash
 git clone git@github.com:pSujet/transport_mpc.git
 ```
 2. Run the demo of three agents with a centralized MPC controller:
-```
+```bash
 python run_tracking_cen.py
 ```
 3. Run the demo of three agents with a decentralized MPC controller:
-```
+```bash
 python run_tracking_decen.py
 ```
 4. Run the demo of three agents to compare each controller:
-```
+```bash
 python run_tracking_compare.py
 ```
 Press 'P' to pause the simulation and 'R' to resume.
